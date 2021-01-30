@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {addContact, editContact} from "../actions/contactActions";
-
+import {doActionContact} from "../actions/contactActions";
 
 export function AddContact(props) {
     const ref = useRef(null);
@@ -48,9 +47,9 @@ export function AddContact(props) {
             email: email
         }, token, props.user.id];
         if (props.textButton !== 'Редактировать') {
-            dispatch(addContact(data));
+            dispatch(doActionContact(data, 'POST'));
         } else {
-            dispatch(editContact(data));
+            dispatch(doActionContact(data, 'PUT'));
         }
     }
 

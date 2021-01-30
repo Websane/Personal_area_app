@@ -27,65 +27,6 @@ const headers = (token) => {
     }
 }
 
-//добавление нового контакта
-export const addContact = (data) => async (dispatch) => {
-    dispatch(contactRequest());
-    try {
-        let response = await fetch('http://localhost:3001/users', {
-            method: 'POST',
-            body: JSON.stringify(data[0]),
-            headers: headers(data[1]),
-        });
-        let result = await response.json();
-        if (response.ok) {
-             dispatch(contactRequestSuccess(result));
-        } else {
-            dispatch(contactRequestError(`${result.message}`));
-        }
-    } catch (error) {
-        dispatch(contactRequestError(`${error}`));
-    }
-}
-
-//редактирование контакта
-export const editContact = (data) => async (dispatch) => {
-    dispatch(contactRequest());
-    try {
-        let response = await fetch(`http://localhost:3001/users/${data[2]}/`, {
-            method: 'PUT',
-            body: JSON.stringify(data[0]),
-            headers: headers(data[1]),
-        });
-        let result = await response.json();
-        if (response.ok) {
-            dispatch(contactRequestSuccess(result));
-        } else {
-            dispatch(contactRequestError(`${result.message}`));
-        }
-    } catch (error) {
-        dispatch(contactRequestError(`${error}`));
-    }
-}
-
-//удаление контакта
-export const deleteContact = (data) => async (dispatch) => {
-    dispatch(contactRequest());
-    try {
-        let response = await fetch(`http://localhost:3001/users/${data.id}/`, {
-            method: 'DELETE',
-            headers: headers(data.token),
-        });
-        let result = await response.json();
-        if (response.ok) {
-            dispatch(contactRequestSuccess(result));
-        } else {
-            dispatch(contactRequestError(`${result.message}`));
-        }
-    } catch (error) {
-        dispatch(contactRequestError(`${error}`));
-    }
-}
-
 export const doActionContact = (data, method) => async (dispatch) => {
     let url = 'http://localhost:3001/users';
 

@@ -75,10 +75,10 @@ export function AuthForm () {
         if (tokenStatus === 'error') {
             setLogin('');
             setPass('');
-        } else if (tokenStatus === 'success' && usersStatus === 'init') {
+        } else if (tokenStatus === 'success') {
             history.push('/private')
         }
-    }, [tokenStatus, usersStatus, dispatch]);
+    }, [tokenStatus, dispatch]);
 
     //обработчик отправки формы
     const handleSubmit = (ev) => {

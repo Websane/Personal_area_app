@@ -1,16 +1,6 @@
 {
   "users": [
     {
-      "name": "Анастасия Сидорова",
-      "email": "Belle_25@hotmail.com",
-      "id": 1
-    },
-    {
-      "name": "Василий Соловьев",
-      "email": "Demarcus_2@gmail.com",
-      "id": 2
-    },
-    {
       "id": 4,
       "name": "Егор Ершов",
       "email": "Libby.@hotmail.com"
@@ -206,9 +196,9 @@
       "email": "Thurman_14@yahoo.com"
     },
     {
-      "id": 43,
-      "name": "София Мамонтова",
-      "email": "Rachelle_15@yandex.ru"
+      "name": "София Мамонова",
+      "email": "Rachelle_15@yandex.ru",
+      "id": 43
     },
     {
       "id": 44,
@@ -3991,9 +3981,9 @@
       "email": "Camryn.@mail.ru"
     },
     {
-      "id": 800,
-      "name": "Альберт Голубев",
-      "email": "Lyla_17@gmail.com"
+      "name": "Лилия Голубева",
+      "email": "Lyla_17@gmail.com",
+      "id": 800
     }
   ]
 }

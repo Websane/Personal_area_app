@@ -7,7 +7,7 @@ import {Error} from "../components/Error";
 import {Loading} from "../components/Loading";
 import {getUsers} from "../actions/listUsersActions";
 import {AddContact} from "./AddContact";
-import {contactDischarge, deleteContact} from "../actions/contactActions";
+import {contactDischarge, doActionContact} from "../actions/contactActions";
 
 export function UsersList() {
     //проверка элемента на использование
@@ -67,7 +67,7 @@ export function UsersList() {
             }
             const sureDel = confirm('Вы действительно хотите удалить пользователя? Отменить действие будет невозможно');
             if (sureDel) {
-                dispatch(deleteContact(data));
+                dispatch(doActionContact(data, 'DELETE'));
             }
         }
     }

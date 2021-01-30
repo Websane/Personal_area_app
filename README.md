@@ -18,3 +18,8 @@
   `npm start`
 
 5. Enjoy!
+
+### P.S.  
+#### Authorization  
+login: test-app@email.com  
+password: n54df$fsd

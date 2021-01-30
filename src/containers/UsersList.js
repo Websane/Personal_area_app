@@ -8,6 +8,7 @@ import {Loading} from "../components/Loading";
 import {getUsers} from "../actions/listUsersActions";
 import {AddContact} from "./AddContact";
 import {contactDischarge, doActionContact} from "../actions/contactActions";
+import {tokenDelete} from "../actions/tokenActions";
 
 export function UsersList() {
     //проверка элемента на использование
@@ -22,7 +23,7 @@ export function UsersList() {
 
     const dispatch = useDispatch();
 
-    const token = localStorage.getItem('token');
+    const [token, setToken] = useState(localStorage.getItem('token'));
 
     const users = useSelector(state => state.users.list);
     const usersStatus = useSelector(state => state.users.status);
@@ -48,7 +49,15 @@ export function UsersList() {
         setFilterUsers(filterData);
     }
 
+    const isToken = () => localStorage.getItem('token');
+
     const handleOnClick = (ev) => {
+        if (!isToken()) {
+            alert('Токен доступа куда-то запропостился...');
+            setToken(false);
+            dispatch(tokenDelete());
+            return
+        }
         if (ev.target.textContent !== 'Del') {
             setIsAddContactOpened(!isAddContactOpened);
         }
@@ -86,10 +95,11 @@ export function UsersList() {
 
     useEffect(() => {
         const text = 'Access token not provided'
-        if(contactError === text || usersError === text) {
-            alert('Срок действия авторизации закончен, авторизуйтесь снова')
+        if (contactError === text || usersError === text) {
+            alert('Срок действия авторизации закончен, авторизуйтесь снова');
+            dispatch(contactDischarge());
         }
-    }, [contactError, usersError])
+    }, [contactError, usersError, dispatch]);
 
     return(
         <main className="main">

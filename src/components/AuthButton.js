@@ -1,26 +1,25 @@
 import React from "react";
 
-export function AuthButton({ handleClickOut, handleClick, token, usersError, contactError }) {
-    let text
-    let handle
-    let label
-
-    if (token && !usersError && !contactError) {
-        text = 'Выйти';
-        handle = handleClickOut;
-        label = 'кнопка отмены авторизации';
-    } else {
-        text = 'Авторизация';
-        handle = handleClick
-        label = 'кнопка входа в форму авторизации';
+export function AuthButton({ handleClickOut, handleClick, usersError, contactError, tokenStatus, token }) {
+    const data = {
+        text: 'Выйти',
+        handle: handleClickOut,
+        label: 'кнопка отмены авторизации'
     }
-        return (
-            <button
-                className="header__button btn"
-                onClick={handle}
-                aria-label={label}
-            >
-                {text}
-            </button>
-        )
+
+    if (usersError && contactError || tokenStatus === 'init' && !token) {
+        data.text = 'Авторизация';
+        data.handle = handleClick;
+        data.label = 'кнопка входа в форму авторизации';
+    }
+
+    return (
+        <button
+            className="header__button btn"
+            onClick={data.handle}
+            aria-label={data.label}
+        >
+            {data.text}
+        </button>
+    )
 }

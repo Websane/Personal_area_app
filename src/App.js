@@ -12,9 +12,6 @@ import './style.css';
 let App = () => {
     return (
         <Router>
-            {/*<Route path="/" exact component={Header}>*/}
-            {/*    <Header />*/}
-            {/*</Route>*/}
             <Route path="/" exact component={AuthForm} />
             <Route path="/private">
                 <Header />

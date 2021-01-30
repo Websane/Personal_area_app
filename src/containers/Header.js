@@ -1,15 +1,17 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 import {AuthButton} from "../components/AuthButton";
 import {tokenDelete} from "../actions/tokenActions";
 
 export function Header() {
-    const token = localStorage.getItem('token');
-
     const usersError = useSelector(state => state.users.errorMessage);
     const contactError = useSelector(state => state.contact.errorMessage);
+
+    const token = localStorage.getItem('token');
+    const tokenStatus = useSelector(state => state.token.status);
+
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -31,9 +33,10 @@ export function Header() {
                     <AuthButton
                         handleClick={handleClick}
                         handleClickOut={handleClickOut}
-                        token={token}
                         usersError={usersError}
                         contactError={contactError}
+                        tokenStatus={tokenStatus}
+                        token={token}
                     />
                 </div>
             </div>

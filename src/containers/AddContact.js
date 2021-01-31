@@ -10,7 +10,6 @@ export function AddContact(props) {
     const [email, setEmail] = useState('');
 
     const contactStatus = useSelector(state => state.contact.status);
-    const contactError = useSelector(state => state.contact.errorMessage);
 
     const dispatch = useDispatch();
 
@@ -27,19 +26,17 @@ export function AddContact(props) {
            document.removeEventListener('click', handleClick);
        }
     }, []);
-
+    //обрабатываем изменения в полях ввода
     const handleChangeName = (ev) => {
         setName(ev.target.value);
     }
-
     const handleChangeSurname = (ev) => {
         setSurname(ev.target.value);
     }
-
     const handleChangeEmail = (ev) => {
         setEmail(ev.target.value);
     }
-
+    //обрабатываем отправку формы
     const handleSubmit = (ev) => {
         ev.preventDefault();
         const data = [{
@@ -52,20 +49,13 @@ export function AddContact(props) {
             dispatch(doActionContact(data, 'PUT'));
         }
     }
-
+    //следим за статусом действия с контактами
     useEffect(() => {
-        if (contactStatus === 'success' && props.textButton === 'Добавить') {
-            alert('Контакт успешно добавлен');
-            props.onClose();
-        } else if (contactStatus === 'success' && props.textButton === 'Редактировать') {
-            alert('Контакт успешно отредактирован');
-            props.onClose();
-        } else if (contactStatus === 'error') {
-            alert(`Чтото пошло не так: ${contactError}`)
+        if (contactStatus === 'success' || contactStatus === 'error') {
             props.onClose();
         }
     }, [contactStatus]);
-
+    //обрабатываем данные при редактировании
     useEffect(() => {
         if (props.textButton === 'Редактировать') {
             const fullName = props.user.name;

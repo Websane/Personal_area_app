@@ -31,7 +31,7 @@ export function UsersList() {
 
     const [textButton, setTextButton] = useState('Добавить');
     const [user, setUser] = useState({});
-
+    //получаем список юзеров
     useEffect(() => {
         if ((token && usersStatus === 'init') || contactStatus === 'success') {
             dispatch(getUsers(token));
@@ -48,10 +48,11 @@ export function UsersList() {
         let filterData = users.filter(item => reg.test(item.name));
         setFilterUsers(filterData);
     }
-
+    //проверка наличия токена в локальном хранилище
     const isToken = () => localStorage.getItem('token');
-
+    //обработчик клика на кнопки управления контактами
     const handleOnClick = (ev) => {
+        //на случай преждевременного удаления токена из хранилища
         if (!isToken()) {
             alert('Токен доступа куда-то запропостился...');
             setToken(false);
@@ -92,7 +93,7 @@ export function UsersList() {
             dispatch(contactDischarge());
         }
     }, [isAddContactOpened]);
-
+    //слушаем ответ сервера
     useEffect(() => {
         const text = 'Access token not provided'
         if (contactError === text || usersError === text) {
@@ -100,6 +101,22 @@ export function UsersList() {
             dispatch(contactDischarge());
         }
     }, [contactError, usersError, dispatch]);
+    //слушаем статус контакта
+    useEffect(() => {
+        if (contactStatus === 'success') {
+            alert('Выполнено успешно');
+        } else if (contactStatus === 'error') {
+            alert(`Чтото пошло не так: ${contactError}`)
+        }
+    }, [contactStatus]);
+
+    const list = (data, handle) => {
+        if (token && !usersError && !contactError) {
+           return <List data={data} handleOnClick={handle}/>
+        } else  {
+            return null
+        }
+    }
 
     return(
         <main className="main">
@@ -132,8 +149,8 @@ export function UsersList() {
                         {usersStatus === 'error' && <Error error={usersError} />}
                         {contactStatus === 'error' && <Error error={contactError} />}
 
-                        {!touched && token && !usersError && !contactError && <List data={users} handleOnClick={handleOnClick} />}
-                        {touched && token && !usersError && !contactError && <List data={filterUsers} handleOnClick={handleOnClick} />}
+                        {!touched && list(users, handleOnClick)}
+                        {touched && list(filterUsers, handleOnClick)}
                     </div>
                 </div>
             </section>

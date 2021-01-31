@@ -63,14 +63,7 @@ export function AuthForm () {
             setPassError(validatePass());
         }
     }, [login, pass, validateLogin, validatePass]);
-
-    useEffect(() => {
-        if (location.pathname === '/' && usersStatus === 'success') {
-            dispatch(tokenDelete(''));
-            dispatch(usersRemove([]));
-        }
-    }, [location, usersStatus, dispatch]);
-
+    //слушаем статус получения токена
     useEffect(() => {
         if (tokenStatus === 'error') {
             setLogin('');

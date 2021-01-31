@@ -74,17 +74,19 @@ input:focus {
 }
 
 .header__button {
-    padding: 12px;
-    min-width: 100px;
+    padding: 12px 20px;
     text-align: center;
     border: 2px solid #448ad4;
     transition: color .15s linear, background-color .15s linear;
 }
 
-.header__button:hover,
-.header__button:focus {
-    color: white;
-    background-color: #448ad4;
+button:focus {
+    outline: none;
+}
+
+button:focus-visible {
+    outline: 2px solid #0363bc;
+    outline-offset: 2px;
 }
 
 .auth__form {
@@ -139,12 +141,6 @@ input:focus {
     padding: 12px;
 }
 
-.auth__button:hover,
-.auth__button:focus {
-    color: white;
-    background-color: #448ad4;
-}
-
 .users__content {
     display: flex;
     flex-direction: column;
@@ -189,6 +185,9 @@ input:focus {
     background-color: white;
 }
 
+.users__name {
+    font-weight: 600;
+}
 
 .btn {
     font-weight: 700;
@@ -207,16 +206,8 @@ input:focus {
     border: 2px solid aquamarine;
 }
 
-.users__edit:hover {
-    background-color: aquamarine;
-}
-
 .users__remove {
     border: 2px solid crimson;
-}
-
-.users__remove:hover {
-    background-color: crimson;
 }
 
 .add {
@@ -264,20 +255,11 @@ input:focus {
     transition: color .2s ease-in-out, background-color .2s ease-in-out;
 }
 
-.add__btn:hover {
-    color: white;
-    background-color: #448ad4;
-}
-
 .add__button {
     margin-top: 10px;
     padding: 7px;
     background-color: white;
     transition: box-shadow .2s ease-in-out;
-}
-
-.add__button:hover {
-    box-shadow: 5px 3px 20px -5px rgba(0,0,0,0.67);
 }
 
 @media (max-width: 760px) {
@@ -304,11 +286,66 @@ input:focus {
         font-size: 24px;
     }
 
+    .header__button {
+        font-size: 14px;
+        padding: 7px;
+    }
+
+    .add__btn {
+        padding: 4px 13px;
+        font-size: 14px;
+    }
+
     .users__title {
         font-size: 20px;
     }
 
     .users__list {
-        font-size: 14px;
+        font-size: 12px;
+    }
+
+    .users__item {
+        grid-template-columns: 1fr 1fr 50px 50px;
+    }
+}
+
+
+@media (max-width: 390px) {
+    .users__list {
+        font-size: 10px;
+    }
+
+    .users__item {
+        grid-template-columns: 1fr 1fr 40px 40px;
+        gap: 5px;
+    }
+}
+
+@media (hover: hover) {
+    .header__button:hover {
+        color: white;
+        background-color: #448ad4;
+    }
+
+    .auth__button:hover {
+        color: white;
+        background-color: #448ad4;
+    }
+
+    .users__edit:hover {
+        background-color: aquamarine;
+    }
+
+    .users__remove:hover {
+        background-color: crimson;
+    }
+
+    .add__btn:hover {
+        color: white;
+        background-color: #448ad4;
+    }
+
+    .add__button:hover {
+        box-shadow: 5px 3px 20px -5px rgba(0,0,0,0.67);
     }
 }

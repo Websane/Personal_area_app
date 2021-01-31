@@ -3,10 +3,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {HotModuleReplacementPlugin} = require("webpack");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+const NODE_ENV = process.env.NODE_ENV;
+const IS_DEV = NODE_ENV === 'development';
+const IS_PROD = NODE_ENV === 'production';
+
+function setupDevtool() {
+    if (IS_DEV) return 'eval';
+    if (IS_PROD) return false;
+}
+
 module.exports = {
     resolve: {
         alias: {
-            'react-dom': '@hot-loader/react-dom',
+            'react-dom': IS_DEV ? '@hot-loader/react-dom' : 'react-dom',
         },
     },
     entry: {
@@ -16,7 +25,7 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
         filename: '[name].bundle.js',
     },
-    mode: 'development',
+    mode: NODE_ENV ? NODE_ENV : 'development',
     devServer: {
         historyApiFallback: true,
         contentBase: path.resolve(__dirname, './dist'),
@@ -34,7 +43,7 @@ module.exports = {
             filename: 'index.html', // название выходного файла
         }),
         new CleanWebpackPlugin(),
-        new HotModuleReplacementPlugin(),
+        new HotModuleReplacementPlugin()
     ],
     module: {
         rules: [
@@ -60,5 +69,6 @@ module.exports = {
                 use: ['style-loader', 'css-loader'],
             },
         ],
-    }
+    },
+    devtool: setupDevtool(),
 }

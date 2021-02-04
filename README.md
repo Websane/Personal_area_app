@@ -8,16 +8,16 @@
 
 2. Go to the project directory
 
-2. Installing the required modules:
+3. Installing the required modules:
   `npm i`
   
-3. Starting the built-in server (port 3001):
+4. Starting the built-in server (port 3001):
   `npm run server`
   
-4. Starting the app (port 8080):
+5. Starting the app (port 8080):
   `npm start`
 
-5. Enjoy!
+6. Enjoy!
 
 ### P.S.  
 #### Authorization  
